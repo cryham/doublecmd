@@ -1734,11 +1734,11 @@ var
     begin
       if ColorIsLight(BackgroundColor) then
       begin
-        TextColor := LightColor(TextColor, AFile.RecentlyUpdatedPct);
+        //TextColor := LightColor(TextColor, AFile.RecentlyUpdatedPct);  //cryham
         BackgroundColor := LightColor(BackgroundColor, AFile.RecentlyUpdatedPct)
       end
       else begin
-        TextColor := DarkColor(TextColor, AFile.RecentlyUpdatedPct);
+        //TextColor := DarkColor(TextColor, AFile.RecentlyUpdatedPct);
         BackgroundColor := DarkColor(BackgroundColor, AFile.RecentlyUpdatedPct);
       end;
     end;
