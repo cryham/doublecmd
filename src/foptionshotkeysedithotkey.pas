@@ -124,7 +124,7 @@ begin
   if GetShortcutsEditorsCount < MaxShortcutSequenceLength then
   begin
     EditControl := TEdit.Create(Self);
-    EditControl.Font.Color:=clRed;
+    //EditControl.Font.Color:=clRed;
     EditControl.Parent := pnlShortcuts;
     EditControl.OnKeyDown  := @edtShortcutKeyDown;
     EditControl.OnKeyPress := @edtShortcutKeyPress;
