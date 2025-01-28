@@ -27,7 +27,7 @@ unit uFileViewWithPanels;
 interface
 
 uses
-  Classes, SysUtils, Controls, ExtCtrls, StdCtrls,
+  Classes, SysUtils, Controls, ExtCtrls, StdCtrls, Graphics,
   uFileView,
   uFileViewHeader,
   uFileSource;
@@ -111,12 +111,14 @@ begin
   pnlFooter.BevelInner     := bvNone;
   pnlFooter.BevelOuter     := bvNone;
   pnlFooter.AutoSize       := True;
+  pnlFooter.Font.Style     := [fsBold];  //cryham
   pnlFooter.DoubleBuffered := True;
 
   lblInfo          := TLabel.Create(pnlFooter);
   lblInfo.Parent   := pnlFooter;
   lblInfo.AutoSize := False;
   lblInfo.Align    := alClient;
+  lblInfo.Font.Style := [fsBold];  //cryham
 
   {$IF DEFINED(LCLGTK2)}
   // Workaround: "Layout and line"
