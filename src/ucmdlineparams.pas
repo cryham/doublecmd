@@ -71,7 +71,7 @@ begin
   end;
   FillChar(CommandLineParams, SizeOf(TCommandLineParams), #0);
 
-  HideConsoleWindow;
+  HideConsoleWindow;  //cryham
   CommandLineParams.NoSplash:= True;
 
   repeat

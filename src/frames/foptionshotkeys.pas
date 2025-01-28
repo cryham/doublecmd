@@ -308,7 +308,7 @@ begin
       begin
         if not (gdSelected in aState) then
         begin
-          //Canvas.Font.Color := clWhite; //clRed;
+          //Canvas.Font.Color := clWhite; //clRed;  //cryham
         end
       end;
     end;
