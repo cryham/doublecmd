@@ -27,7 +27,7 @@ unit uMainCommands;
 interface
 
 uses
-  Classes, SysUtils, ActnList, uFileView, uFileViewNotebook, uFileSourceOperation,
+  Classes, SysUtils, ActnList, uFileView, uFileViewNotebook, uFileSourceOperation, uTypes,
   uGlobs, uFileFunctions, uFormCommands, uFileSorting, uShellContextMenu, Menus, ufavoritetabs,ufile
 {$IFDEF DARWIN}
   , uMyDarwin
@@ -568,7 +568,9 @@ begin
       if Size < 0 then
         msgOK(Format(rsSpaceMsg, [Files, Directories, '???', '???']))
       else begin
-        msgOK(Format(rsSpaceMsg, [Files, Directories, cnvFormatFileSize(Size), IntToStrTS(Size)]));
+        msgOK(Format(rsSpaceMsg, [Files, Directories,
+          // cnvFormatFileSize(Size), IntToStrTS(Size)]));  //cryham
+          cnvFormatFileSize(Size, fsfFloat, 3), cnvFormatFileSize(Size, fsfByte, 0)] ));
       end;
     end;
   end;
