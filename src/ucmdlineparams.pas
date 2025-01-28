@@ -70,6 +70,10 @@ begin
     Name:= 'no-splash';
   end;
   FillChar(CommandLineParams, SizeOf(TCommandLineParams), #0);
+
+  HideConsoleWindow;
+  CommandLineParams.NoSplash:= True;
+
   repeat
     try
       Option:= GetLongOpts('L:l:R:r:P:p:TtCc', @Options[1], OptionIndex);
