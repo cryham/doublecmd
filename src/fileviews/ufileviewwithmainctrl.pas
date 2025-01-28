@@ -1832,8 +1832,10 @@ begin
         {$IFDEF LCLGTK2}
         edtRename.SelStart:=1;
         {$ENDIF}
-        edtRename.SelStart:=0;
-        edtRename.SelLength:=FRenFile.LenNam;
+        //edtRename.SelStart:=0;
+        //edtRename.SelLength:=FRenFile.LenNam;
+        edtRename.SelStart:=FRenFile.LenNam;  //cryham
+        edtRename.SelLength:=0;  // select nothing
       end;
     rfatExt :
       begin
@@ -1845,8 +1847,10 @@ begin
         {$IFDEF LCLGTK2}
         edtRename.SelStart:=1;
         {$ENDIF}
-        edtRename.SelStart:=0;
-        edtRename.SelLength:=FRenFile.LenFul;
+        // edtRename.SelStart:=0;
+        // edtRename.SelLength:=FRenFile.LenFul;
+        edtRename.SelStart:=FRenFile.LenFul;  //cryham
+        edtRename.SelLength:=0;  // select nothing
       end;
     rfatToSeparators:
       begin
