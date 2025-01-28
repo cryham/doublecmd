@@ -72,7 +72,7 @@ resourcestring
   rsMsgSelectedInfo = 'Selected: %s of %s, files: %d of %d, folders: %d of %d';
   rsMsgCloseLockedTab = 'This tab (%s) is locked! Close anyway?';
   rsMsgTabForOpeningInNewTab = 'This tab (%s) is locked! Open directory in another tab?';
-  rsSpaceMsg = 'Files: %d'#13#10'Dirs: %d'#13#10'Size: %s'#13#10'%s B';
+  rsSpaceMsg = 'Files: %d'#13#10'Dirs: %d'#13#10'Size: %s'#13#10'%s B';  //cryham
   rsSelectDir = 'Select a directory';
   rsMarkPlus = 'Select mask';
   rsMarkMinus = 'Unselect mask';
