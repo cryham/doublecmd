@@ -69,10 +69,10 @@ resourcestring
   rsMsgRenFlDr = 'Rename/move %d selected files/directories?';
   rsMsgRenSel = 'Rename/move selected "%s"?';
   rsMsgErrForceDir = 'Can not create directory %s!';
-  rsMsgSelectedInfo = 'Selected: %s of %s, files: %d of %d, folders: %d of %d';
+  rsMsgSelectedInfo = 'Sel: %s / %s  F: %d / %d  D: %d / %d';  //cryham short
   rsMsgCloseLockedTab = 'This tab (%s) is locked! Close anyway?';
   rsMsgTabForOpeningInNewTab = 'This tab (%s) is locked! Open directory in another tab?';
-  rsSpaceMsg = 'Files: %d'#13#10'Dirs: %d'#13#10'Size: %s'#13#10'%s B';  //cryham
+  rsSpaceMsg = 'Files: %d'#13#10'Dirs: %d'#13#10'Size: %s'#13#10'%s B';  //cryham \n
   rsSelectDir = 'Select a directory';
   rsMarkPlus = 'Select mask';
   rsMarkMinus = 'Unselect mask';
