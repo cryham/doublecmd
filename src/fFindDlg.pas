@@ -248,6 +248,8 @@ type
     procedure lbSearchTemplatesDblClick(Sender: TObject);
     procedure lbSearchTemplatesSelectionChange(Sender: TObject; {%H-}User: boolean);
     procedure lsFoundedFilesDblClick(Sender: TObject);
+    procedure lsFoundedFilesDrawItem(Control: TWinControl; Index: Integer;
+      ARect: TRect; State: TOwnerDrawState);
     procedure lsFoundedFilesKeyDown(Sender: TObject;
       var Key: word; Shift: TShiftState);
     procedure lsFoundedFilesMouseDown(Sender: TObject; Button: TMouseButton;
@@ -683,7 +685,7 @@ begin
   // fill search depth combobox
   cmbSearchDepth.Items.Add(rsFindDepthAll);
   cmbSearchDepth.Items.Add(rsFindDepthCurDir);
-  for I := 1 to 100 do
+  for I := 1 to 9 do  //100  //cryham
     cmbSearchDepth.Items.Add(Format(rsFindDepth, [IntToStr(I)]));
   cmbSearchDepth.ItemIndex := 0;
   // fill encoding combobox
@@ -863,7 +865,7 @@ begin
   begin
     if glsSearchHistory.Count > 0 then
       cmbFindText.Text := glsSearchHistory[0];
-    end;
+  end;
 
   cmbSearchDepth.ItemIndex := 0;
   cmbExcludeFiles.Text := '';
@@ -2514,6 +2516,37 @@ procedure TfrmFindDlg.lsFoundedFilesDblClick(Sender: TObject);
 begin
   cm_GoToFile([]);
 end;
+
+procedure TfrmFindDlg.lsFoundedFilesDrawItem(Control: TWinControl;  //cryham
+  Index: Integer; ARect: TRect; State: TOwnerDrawState);
+var
+  aColor: TColor;
+  path: String;
+  AFile: TFile;
+  FileSource: IFileSource;
+begin
+  aColor:= clBlack; //`gBackColor;  //todo`
+  lsFoundedFiles.Canvas.Brush.Color:= aColor;
+  lsFoundedFiles.Canvas.FillRect(ARect);
+  //if odSelected in State then aColor:= gCursorColor;
+  //`lsFoundedFiles.Canvas.Pen.Color:= gCursorColor; //aColor;
+  lsFoundedFiles.Canvas.Pen.Style:= psSolid;
+  lsFoundedFiles.Canvas.FrameRect(ARect);
+
+  path:= lsFoundedFiles.Items[Index];
+  AFile:= TFile.Create(path);
+  AFile.FullPath:= path;
+
+  aColor:= gColorExt.GetColorBy(AFile);
+  //`if aColor = clDefault then  aColor:= gForeColor;
+  AFile.Free;
+
+  //if odSelected in State then aColor:=$F0F8FF;
+  lsFoundedFiles.Canvas.Font.Color:= aColor;
+  lsFoundedFiles.Canvas.Font.Bold:= True;
+  lsFoundedFiles.Canvas.TextRect(ARect, 2, ARect.Top, path);
+end;
+
 
 { TfrmFindDlg.lsFoundedFilesKeyDown }
 procedure TfrmFindDlg.lsFoundedFilesKeyDown(Sender: TObject;
