@@ -2525,20 +2525,20 @@ var
   AFile: TFile;
   FileSource: IFileSource;
 begin
-  aColor:= clBlack; //`gBackColor;  //todo`
+  aColor:= clBlack; //gBackColor;  //todo`
   lsFoundedFiles.Canvas.Brush.Color:= aColor;
   lsFoundedFiles.Canvas.FillRect(ARect);
-  //if odSelected in State then aColor:= gCursorColor;
-  //`lsFoundedFiles.Canvas.Pen.Color:= gCursorColor; //aColor;
-  lsFoundedFiles.Canvas.Pen.Style:= psSolid;
-  lsFoundedFiles.Canvas.FrameRect(ARect);
+
+  lsFoundedFiles.Canvas.Brush.Color:= clSkyBlue;  //gCursorColor;  //todo`
+  if odSelected in State then
+    lsFoundedFiles.Canvas.FrameRect(ARect);
 
   path:= lsFoundedFiles.Items[Index];
   AFile:= TFile.Create(path);
   AFile.FullPath:= path;
 
   aColor:= gColorExt.GetColorBy(AFile);
-  //`if aColor = clDefault then  aColor:= gForeColor;
+  //if aColor = clDefault then  aColor:= gForeColor;  //todo`
   AFile.Free;
 
   //if odSelected in State then aColor:=$F0F8FF;
