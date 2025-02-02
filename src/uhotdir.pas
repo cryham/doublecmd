@@ -403,7 +403,7 @@ var
         begin
           localmi := TMenuItem.Create(ParamMenuItem);
           localmi.Caption := GetCaption(HotDir[I - 1].HotDirName);
-          if gIconsInMenus then localmi.ImageIndex:=ICONINDEX_SUBMENU;
+          // if gIconsInMenus then localmi.ImageIndex:=ICONINDEX_SUBMENU;  //cryham
           ParamMenuItem.Add(localmi);
           CompleteMenu(localmi);
           if localmi.Count <> 0 then
@@ -512,7 +512,7 @@ begin
         begin
           miMainTree := TMenuItem.Create(mncmpMenuComponentToPopulate);
           miMainTree.Caption := GetCaption(HotDir[I - 1].HotDirName);
-          if gIconsInMenus then miMainTree.ImageIndex := ICONINDEX_SUBMENU;
+          // if gIconsInMenus then miMainTree.ImageIndex := ICONINDEX_SUBMENU;  //cryham
           if mncmpMenuComponentToPopulate.ClassType = TPopupMenu then
             TPopupMenu(mncmpMenuComponentToPopulate).Items.Add(miMainTree)
           else
@@ -565,13 +565,13 @@ begin
         gSpecialDirList.PopulateMenuWithSpecialDir(mncmpMenuComponentToPopulate, mp_CHANGEDIR, ProcedureWhenHotDirItemClicked);
 
         // now add delimiter
-        miMainTree := TMenuItem.Create(mncmpMenuComponentToPopulate);
+        {miMainTree := TMenuItem.Create(mncmpMenuComponentToPopulate);  //cryham short rem
         miMainTree.Caption := '-';
         if mncmpMenuComponentToPopulate.ClassType = TPopupMenu then TPopupMenu(mncmpMenuComponentToPopulate).Items.Add(miMainTree)
-        else if mncmpMenuComponentToPopulate.ClassType = TMenuItem then TMenuItem(mncmpMenuComponentToPopulate).Add(miMainTree);
+        else if mncmpMenuComponentToPopulate.ClassType = TMenuItem then TMenuItem(mncmpMenuComponentToPopulate).Add(miMainTree);}
 
         //now add the "selected path", if any, if it's the case
-        if MaybeActiveOrSelectedDirectories.Count>0 then
+        (*if MaybeActiveOrSelectedDirectories.Count>0 then
         begin
           miMainTree := TMenuItem.Create(mncmpMenuComponentToPopulate);
           case MaybeActiveOrSelectedDirectories.Count of
@@ -582,24 +582,26 @@ begin
           miMainTree.OnClick := ProcedureWhenHotDirAddOrConfigClicked;
           if mncmpMenuComponentToPopulate.ClassType = TPopupMenu then TPopupMenu(mncmpMenuComponentToPopulate).Items.Add(miMainTree)
           else if mncmpMenuComponentToPopulate.ClassType = TMenuItem then TMenuItem(mncmpMenuComponentToPopulate).Add(miMainTree);
-        end;
+        end;*)
 
         // now allow to add or re-add the "current path"
         miMainTree := TMenuItem.Create(mncmpMenuComponentToPopulate);
-        with Application.MainForm as TForm do if not FlagCurrentPathAlreadyInMenu then miMainTree.Caption := rsMsgHotDirAddThisDirectory + MinimizeFilePath(frmMain.ActiveFrame.CurrentPath, Canvas, 250).Replace('&','&&') else miMainTree.Caption := rsMsgHotDirReAddThisDirectory + MinimizeFilePath(frmMain.ActiveFrame.CurrentPath, Canvas, 250).Replace('&','&&');
+        with Application.MainForm as TForm do  //cryham short
+          if not FlagCurrentPathAlreadyInMenu then miMainTree.Caption := rsMsgHotDirAddThisDirectory // + MinimizeFilePath(frmMain.ActiveFrame.CurrentPath, Canvas, 250).Replace('&','&&')
+          else miMainTree.Caption := rsMsgHotDirReAddThisDirectory; // + MinimizeFilePath(frmMain.ActiveFrame.CurrentPath, Canvas, 250).Replace('&','&&');
         miMainTree.Tag := ACTION_ADDTOHOTLIST;
         miMainTree.OnClick := ProcedureWhenHotDirAddOrConfigClicked;
         if mncmpMenuComponentToPopulate.ClassType = TPopupMenu then TPopupMenu(mncmpMenuComponentToPopulate).Items.Add(miMainTree)
         else if mncmpMenuComponentToPopulate.ClassType = TMenuItem then TMenuItem(mncmpMenuComponentToPopulate).Add(miMainTree);
 
         // now add configure item
-        miMainTree := TMenuItem.Create(mncmpMenuComponentToPopulate);
+        {miMainTree := TMenuItem.Create(mncmpMenuComponentToPopulate);  //cryham rem
         miMainTree.Caption := rsMsgHotDirConfigHotlist;
         miMainTree.Tag := ACTION_CONFIGTOHOTLIST;
         miMainTree.ShortCut := frmMain.mnuCmdConfigDirHotlist.ShortCut;
         miMainTree.OnClick := ProcedureWhenHotDirAddOrConfigClicked;
         if mncmpMenuComponentToPopulate.ClassType = TPopupMenu then TPopupMenu(mncmpMenuComponentToPopulate).Items.Add(miMainTree)
-        else if mncmpMenuComponentToPopulate.ClassType = TMenuItem then TMenuItem(mncmpMenuComponentToPopulate).Add(miMainTree);
+        else if mncmpMenuComponentToPopulate.ClassType = TMenuItem then TMenuItem(mncmpMenuComponentToPopulate).Add(miMainTree);}
       end;
     end; //case KindHotDirMenuPopulation of
   finally
@@ -844,9 +846,9 @@ function TDirectoryHotlist.AddFromAnotherTTreeViewTheSelected(ParamWorkingTreeVi
           if ParamWorkingTreeView<>nil then
           begin
             NewTreeNode := ParamWorkingTreeView.Items.AddChildObject(InsertionNodePlace, WorkingHotDirEntry.HotDirName,HotDir[count-1]);
-            NewTreeNode.ImageIndex:=ICONINDEX_SUBMENU;
-            NewTreeNode.SelectedIndex:=ICONINDEX_SUBMENU;
-            NewTreeNode.StateIndex:=ICONINDEX_SUBMENU;
+            // NewTreeNode.ImageIndex:=ICONINDEX_SUBMENU;  //cryham
+            // NewTreeNode.SelectedIndex:=ICONINDEX_SUBMENU;
+            // NewTreeNode.StateIndex:=ICONINDEX_SUBMENU;
           end;
           inc(result);
         end;

@@ -434,7 +434,7 @@ begin
   LocalSpecialDir.PathValue:=ExcludeTrailingPathDelimiter(gpCfgDir);
   Add(LocalSpecialDir);
 
-  LocalSpecialDir:=TSpecialDir.Create;
+  {LocalSpecialDir:=TSpecialDir.Create;
   LocalSpecialDir.fDispatcher:=sd_DOUBLECOMMANDER;
   LocalSpecialDir.VariableName:=ENVVARTODAYSDATE;
   LocalSpecialDir.PathValue:=Format('%d-%2.2d-%2.2d',[1980,01,01]); //Don't worry for the exact date: the routine "ReplaceEnvVars" will substitue for the correct date value
@@ -445,7 +445,7 @@ begin
   LocalSpecialDir.fDispatcher:=sd_DOUBLECOMMANDER;
   LocalSpecialDir.VariableName:=VARDELIMITER+'CURRENTUSER'+VARDELIMITER_END;
   LocalSpecialDir.PathValue:=GetCurrentUserName;
-  Add(LocalSpecialDir);
+  Add(LocalSpecialDir);}  //cryham rem
 
   IndexOfSpecialDirComptibleTC:=count;
 
