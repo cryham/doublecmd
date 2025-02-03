@@ -2169,27 +2169,27 @@ begin
         Result := sFormatStr;
       end;
 
-      'N':
+      'n','N':
       begin
         Result := sReplaceXX(sFormatStr, aFile.NameNoExt);
       end;
 
-      'E':
+      'e','E':
       begin
         Result := sReplaceXX(sFormatStr, aFile.Extension);
       end;
 
-      'A':
+      'a','A':
       begin
         Result := sReplaceBadChars(sReplaceXX(sFormatStr, aFile.FullPath));
       end;
 
-      'G':
+      'g','G':
       begin
         Result := GuidToString(DCGetNewGUID);
       end;
 
-      'V':
+      'v','V':
       begin
         if FActuallyRenamingFile then
           Result := sReplaceVariable(sFormatStr)
@@ -2197,7 +2197,7 @@ begin
           Result := '[' + sFormatStr + ']';
       end;
 
-      'C':
+      'c','C':
       begin
         // Check for start value after C, e.g. C12
         if not TryStrToInt64(Copy(sFormatStr, 2, MaxInt), Index) then
@@ -2206,7 +2206,7 @@ begin
         Result := Format('%.' + cmbxWidth.Items[cmbxWidth.ItemIndex] + 'd', [Counter]);
       end;
 
-      'P':  // sub path index
+      'p','P':  // sub path index
       begin
         Index := StrToIntDef(Copy(sFormatStr, 2, MaxInt), 0);
         Dirs := (aFile.Path + ' ').Split([PathDelim]);
