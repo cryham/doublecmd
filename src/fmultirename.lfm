@@ -566,16 +566,15 @@ object frmMultiRename: TfrmMultiRename
           ItemHeight = 0
           ItemIndex = 0
           Items.Strings = (
-            '01'
-            '02'
-            '03'
-            '04'
-            '05'
-            '06'
-            '07'
-            '08'
-            '09'
-            '10'
+            '1'
+            '2'
+            '3'
+            '4'
+            '5'
+            '6'
+            '7'
+            '8'
+            '9'
           )
           OnChange = cbNameStyleChange
           ParentFont = False
