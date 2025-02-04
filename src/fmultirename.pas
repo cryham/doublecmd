@@ -48,7 +48,7 @@ uses
   //DC
   DCXmlConfig, uOSForms, uRegExprW, uFileProperty, uFormCommands,
   uFileSourceSetFilePropertyOperation, DCStringHashListUtf8, uClassesEx, uFile,
-  uFileSource, DCClassesUtf8, uHotkeyManager;
+  uFileSource, DCClassesUtf8, uHotkeyManager, Types;
 
 const
   HotkeysCategoryMultiRename = 'MultiRename'; // <--Not displayed to user, stored in .scf (Shortcut Configuration File)
@@ -124,14 +124,24 @@ type
 
   { TfrmMultiRename }
   TfrmMultiRename = class(TAloneForm, IFormCommands)
+    btnPresets: TKASButton;
+    btnPresetAdd: TButton;
+    btnPresetDel: TButton;
     cbCaseSens: TCheckBox;
+    cbPresets: TComboBox;
     cbRegExp: TCheckBox;
     cbUseSubs: TCheckBox;
     cbOnlyFirst: TCheckBox;
+    edPreset: TEdit;
+    lbPresets: TLabel;
+    lsPresets: TListBox;
     pnlFindReplace: TPanel;
     pnlButtons: TPanel;
-    StringGrid: TStringGrid;
-    pnlOptions: TPanel;
+    pnlOptions1: TPanel;
+    pnlOptionsLeft1: TPanel;
+    pnlOptionsRight1: TPanel;
+    spltMainSplitter1: TSplitter;
+    pnlOptions2: TPanel;
     pnlOptionsLeft: TPanel;
     gbMaska: TGroupBox;
     lbName: TLabel;
@@ -142,10 +152,7 @@ type
     cbExt: TComboBox;
     btnAnyExtMask: TKASButton;
     cmbExtensionStyle: TComboBox;
-    gbPresets: TGroupBox;
-    cbPresets: TComboBox;
-    btnPresets: TKASButton;
-    spltMainSplitter: TSplitter;
+    spltMainSplitter2: TSplitter;
     pnlOptionsRight: TKASToolPanel;
     gbFindReplace: TGroupBox;
     lbFind: TLabel;
@@ -235,10 +242,14 @@ type
     actClearExtMask: TAction;
     actInvokeRelativePath: TAction;
     actViewRenameLogFile: TAction;
+    StringGrid: TStringGrid;
     procedure FormCreate({%H-}Sender: TObject);
     procedure FormCloseQuery({%H-}Sender: TObject; var CanClose: boolean);
     procedure FormClose({%H-}Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
+    procedure StringGridDrawCell(Sender: TObject; aCol, aRow: Integer;
+      aRect: TRect; aState: TGridDrawState);
     procedure StringGridKeyDown({%H-}Sender: TObject; var Key: word; Shift: TShiftState);
     procedure StringGridMouseDown({%H-}Sender: TObject; Button: TMouseButton; {%H-}Shift: TShiftState; X, Y: integer);
     procedure StringGridMouseUp({%H-}Sender: TObject; Button: TMouseButton; {%H-}Shift: TShiftState; {%H-}X, {%H-}Y: integer);
@@ -672,16 +683,54 @@ begin
   end;
 end;
 
+procedure TfrmMultiRename.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  case Key of
+    VK_F2:
+      begin
+        cbPresets.SetFocus;
+      end;
+    VK_ESCAPE:
+      begin
+        Close;
+      end;
+    VK_DOWN:
+      begin
+        {if cbName.Focused then
+          btnAnyNameMask(Sender)
+        else if cbExt.Focused then
+          btnAnyExtMask.clicSender)}
+      end;
+    VK_NEXT:  // PgDn
+      begin
+        {if cbName.Focused then
+          cmbNameStyle.SetFocus
+        else if cbExt.Focused then
+          cmbExtensionStyle.SetFocus}
+      end;
+    {VK_RETURN, VK_SELECT:
+      begin
+      end;}
+  end;
+end;
+
 procedure TfrmMultiRename.FormShow(Sender: TObject);
 var
   APoint: TPoint;
 begin
 {$IF DEFINED(LCLQT5)}
-  gbPresets.Constraints.MaxHeight:= cbPresets.Height + (gbPresets.Height - gbPresets.ClientHeight) + 
-                                    gbPresets.ChildSizing.TopBottomSpacing * 2;
+//  gbPresets.Constraints.MaxHeight:= cbPresets.Height + (gbPresets.Height - gbPresets.ClientHeight) +
+//                                    gbPresets.ChildSizing.TopBottomSpacing * 2;
 {$ENDIF}
   APoint:= TPoint.Create(cbUseSubs.Left, 0);
   fneRenameLogFileFilename.BorderSpacing.Left:= gbFindReplace.ClientToParent(APoint, pnlOptionsRight).X;
+end;
+
+procedure TfrmMultiRename.StringGridDrawCell(Sender: TObject; aCol,
+  aRow: Integer; aRect: TRect; aState: TGridDrawState);
+begin
+
 end;
 
 { TfrmMultiRename.StringGridKeyDown }
@@ -1214,13 +1263,18 @@ begin
 
   cbPresets.Clear;
   cbPresets.Items.Add(rsMulRenLastPreset);
+  lsPresets.Clear;
+  lsPresets.Items.Add(rsMulRenLastPreset);
 
   for i := 0 to pred(FMultiRenamePresetList.Count) do
   begin
     PresetName := FMultiRenamePresetList.MultiRenamePreset[i].PresetName;
     if (PresetName <> sLASTPRESET) then
       if cbPresets.Items.IndexOf(PresetName) = -1 then
+      begin
         cbPresets.Items.Add(PresetName);
+        lsPresets.Items.Add(PresetName);
+      end;
   end;
 
   if (WantedSelectedPresetName = sLASTPRESET) or (WantedSelectedPresetName = sFRESHMASKS) then
@@ -1228,11 +1282,17 @@ begin
   else
   if sRememberSelection <> '' then
     if cbPresets.Items.IndexOf(sRememberSelection) <> -1 then
+    begin
       cbPresets.ItemIndex := cbPresets.Items.IndexOf(sRememberSelection);
+      lsPresets.ItemIndex := cbPresets.Items.IndexOf(sRememberSelection);
+    end;
 
   if cbPresets.ItemIndex = -1 then
     if cbPresets.Items.Count > 0 then
+    begin
       cbPresets.ItemIndex := 0;
+      lsPresets.ItemIndex := 0;
+    end;
 
   if WantedSelectedPresetName <> sFRESHMASKS then
   begin
@@ -1326,7 +1386,7 @@ begin
   btnPresets.Constraints.MinWidth := fneRenameLogFileFilename.ButtonWidth;
 
   miPresets := TMenuItem.Create(mmMainMenu);
-  miPresets.Caption := gbPresets.Caption;
+  miPresets.Caption := lbPresets.Caption;
   mmMainMenu.Items.Add(miPresets);
   BuildPresetsMenu(miPresets);
   BuildPresetsMenu(pmPresets);
@@ -2040,7 +2100,7 @@ begin
     FNames.Assign(AFileList);
 
     gbMaska.Enabled := False;
-    gbPresets.Enabled := False;
+    //gbPresets.Enabled := False;
     gbCounter.Enabled := False;
 
     StringGridTopLeftChanged(StringGrid);
@@ -2336,7 +2396,7 @@ begin
   cbPresets.Text := '';
   FNames.Clear;
   gbMaska.Enabled := True;
-  gbPresets.Enabled := True;
+  //gbPresets.Enabled := True;
   cbPresets.ItemIndex := 0;
   gbCounter.Enabled := True;
   StringGridTopLeftChanged(StringGrid);

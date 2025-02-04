@@ -1,91 +1,47 @@
 object frmMultiRename: TfrmMultiRename
-  Left = 492
-  Height = 624
-  Top = 132
-  Width = 788
+  Left = 825
+  Height = 645
+  Top = 444
+  Width = 1095
   ActiveControl = cbName
+  Anchors = [akLeft, akRight]
   Caption = 'Multi-Rename Tool'
-  ClientHeight = 597
-  ClientWidth = 788
+  ClientHeight = 622
+  ClientWidth = 1095
   KeyPreview = True
   Menu = mmMainMenu
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   Position = poScreenCenter
   SessionProperties = 'Height;Left;Top;Width;WindowState;pnlOptionsLeft.Width'
   ShowHint = True
   ShowInTaskBar = stAlways
-  LCLVersion = '2.0.12.0'
-  object StringGrid: TStringGrid
+  LCLVersion = '2.2.6.0'
+  object pnlOptions2: TPanel
     Left = 6
-    Height = 261
-    Top = 6
-    Width = 776
-    Align = alClient
-    AutoFillColumns = True
-    BorderSpacing.Left = 6
-    BorderSpacing.Top = 6
-    BorderSpacing.Right = 6
-    ColCount = 3
-    Columns = <    
-      item
-        SizePriority = 0
-        Title.Caption = 'Old File Name'
-        Width = 248
-      end    
-      item
-        SizePriority = 0
-        Title.Caption = 'New File Name'
-        Width = 249
-      end    
-      item
-        Title.Caption = 'File Path'
-        Width = 277
-      end>
-    ExtendedSelect = False
-    FixedCols = 0
-    MouseWheelOption = mwGrid
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goRowSelect, goSmoothScroll]
-    ParentFont = False
-    RowCount = 1
-    TabOrder = 2
-    TitleStyle = tsNative
-    OnKeyDown = StringGridKeyDown
-    OnMouseDown = StringGridMouseDown
-    OnMouseUp = StringGridMouseUp
-    OnResize = StringGridTopLeftChanged
-    OnSelection = StringGridSelection
-    OnTopLeftChanged = StringGridTopLeftChanged
-    ColWidths = (
-      248
-      249
-      277
-    )
-  end
-  object pnlOptions: TPanel
-    Left = 6
-    Height = 275
-    Top = 273
-    Width = 776
+    Height = 183
+    Top = 396
+    Width = 1083
     Align = alBottom
     AutoSize = True
     BorderSpacing.Around = 6
     BevelOuter = bvNone
-    ClientHeight = 275
-    ClientWidth = 776
+    ClientHeight = 183
+    ClientWidth = 1083
     ParentFont = False
     TabOrder = 0
     object pnlOptionsLeft: TPanel
       AnchorSideRight.Side = asrBottom
       Left = 0
-      Height = 275
+      Height = 183
       Top = 0
       Width = 250
       Align = alLeft
       BevelOuter = bvNone
-      ClientHeight = 275
+      ClientHeight = 183
       ClientWidth = 250
       ParentFont = False
       TabOrder = 0
@@ -95,7 +51,7 @@ object frmMultiRename: TfrmMultiRename
         AnchorSideRight.Control = pnlOptionsLeft
         AnchorSideRight.Side = asrBottom
         Left = 0
-        Height = 210
+        Height = 183
         Top = 0
         Width = 250
         Anchors = [akTop, akLeft, akRight]
@@ -104,8 +60,8 @@ object frmMultiRename: TfrmMultiRename
         ChildSizing.LeftRightSpacing = 4
         ChildSizing.HorizontalSpacing = 2
         ChildSizing.VerticalSpacing = 2
-        ClientHeight = 190
-        ClientWidth = 248
+        ClientHeight = 156
+        ClientWidth = 244
         ParentFont = False
         TabOrder = 0
         object lbName: TLabel
@@ -113,10 +69,10 @@ object frmMultiRename: TfrmMultiRename
           AnchorSideTop.Control = gbMaska
           AnchorSideBottom.Control = cbName
           Left = 4
-          Height = 17
+          Height = 18
           Top = 0
-          Width = 61
-          Caption = 'File &Name'
+          Width = 37
+          Caption = 'N&ame'
           FocusControl = cbName
           ParentColor = False
           ParentFont = False
@@ -126,8 +82,8 @@ object frmMultiRename: TfrmMultiRename
           AnchorSideTop.Control = cbNameMaskStyle
           AnchorSideTop.Side = asrBottom
           Left = 4
-          Height = 17
-          Top = 95
+          Height = 18
+          Top = 78
           Width = 60
           Caption = '&Extension'
           FocusControl = cbExt
@@ -142,12 +98,12 @@ object frmMultiRename: TfrmMultiRename
           AnchorSideRight.Control = gbMaska
           AnchorSideRight.Side = asrBottom
           Left = 29
-          Height = 35
-          Top = 56
-          Width = 215
+          Height = 26
+          Top = 48
+          Width = 211
           Anchors = [akTop, akLeft, akRight]
           BorderSpacing.Bottom = 4
-          ItemHeight = 0
+          ItemHeight = 26
           OnChange = cbNameStyleChange
           ParentFont = False
           Style = csDropDownList
@@ -162,12 +118,12 @@ object frmMultiRename: TfrmMultiRename
           AnchorSideRight.Side = asrBottom
           AnchorSideBottom.Side = asrBottom
           Left = 29
-          Height = 35
-          Top = 151
-          Width = 215
+          Height = 26
+          Top = 126
+          Width = 211
           Anchors = [akTop, akLeft, akRight]
           BorderSpacing.Bottom = 4
-          ItemHeight = 0
+          ItemHeight = 26
           OnChange = cbNameStyleChange
           ParentFont = False
           Style = csDropDownList
@@ -179,8 +135,8 @@ object frmMultiRename: TfrmMultiRename
           AnchorSideBottom.Control = cbNameMaskStyle
           AnchorSideBottom.Side = asrBottom
           Left = 4
-          Height = 35
-          Top = 56
+          Height = 26
+          Top = 48
           Width = 23
           Anchors = [akTop, akLeft, akBottom]
           TabOrder = 1
@@ -192,8 +148,8 @@ object frmMultiRename: TfrmMultiRename
           AnchorSideBottom.Control = cmbExtensionStyle
           AnchorSideBottom.Side = asrBottom
           Left = 4
-          Height = 35
-          Top = 151
+          Height = 26
+          Top = 126
           Width = 23
           Anchors = [akTop, akLeft, akBottom]
           TabOrder = 4
@@ -206,12 +162,12 @@ object frmMultiRename: TfrmMultiRename
           AnchorSideRight.Control = gbMaska
           AnchorSideRight.Side = asrBottom
           Left = 4
-          Height = 35
-          Top = 19
-          Width = 240
+          Height = 26
+          Top = 20
+          Width = 236
           Anchors = [akTop, akLeft, akRight]
           AutoSelect = False
-          ItemHeight = 0
+          ItemHeight = 18
           OnChange = cbNameStyleChange
           ParentFont = False
           TabOrder = 0
@@ -223,104 +179,44 @@ object frmMultiRename: TfrmMultiRename
           AnchorSideRight.Control = gbMaska
           AnchorSideRight.Side = asrBottom
           Left = 4
-          Height = 35
-          Top = 114
-          Width = 240
+          Height = 26
+          Top = 98
+          Width = 236
           Anchors = [akTop, akLeft, akRight]
           AutoSelect = False
-          ItemHeight = 0
+          ItemHeight = 18
           OnChange = cbNameStyleChange
           ParentFont = False
           TabOrder = 3
         end
       end
-      object gbPresets: TGroupBox
-        AnchorSideLeft.Control = pnlOptionsLeft
-        AnchorSideTop.Control = gbMaska
-        AnchorSideTop.Side = asrBottom
-        AnchorSideRight.Control = pnlOptionsLeft
-        AnchorSideRight.Side = asrBottom
-        Left = 0
-        Height = 59
-        Top = 216
-        Width = 250
-        Anchors = [akTop, akLeft, akRight]
-        AutoSize = True
-        BorderSpacing.Top = 6
-        Caption = 'Presets'
-        ChildSizing.LeftRightSpacing = 4
-        ChildSizing.TopBottomSpacing = 2
-        ChildSizing.HorizontalSpacing = 2
-        ClientHeight = 39
-        ClientWidth = 248
-        ParentColor = False
-        ParentFont = False
-        TabOrder = 1
-        object cbPresets: TComboBox
-          AnchorSideLeft.Control = gbPresets
-          AnchorSideTop.Control = gbPresets
-          AnchorSideRight.Control = btnPresets
-          AnchorSideBottom.Side = asrBottom
-          Left = 4
-          Height = 35
-          Top = 2
-          Width = 222
-          Anchors = [akTop, akLeft, akRight]
-          DropDownCount = 15
-          ItemHeight = 0
-          OnChange = cbPresetsChange
-          OnCloseUp = cbPresetsCloseUp
-          ParentFont = False
-          Style = csDropDownList
-          TabOrder = 1
-        end
-        object btnPresets: TKASButton
-          AnchorSideTop.Control = cbPresets
-          AnchorSideRight.Control = gbPresets
-          AnchorSideRight.Side = asrBottom
-          AnchorSideBottom.Control = cbPresets
-          AnchorSideBottom.Side = asrBottom
-          Left = 228
-          Height = 35
-          Top = 2
-          Width = 16
-          Anchors = [akTop, akRight, akBottom]
-          AutoSize = True
-          Constraints.MinWidth = 16
-          ParentBidiMode = False
-          ParentFont = False
-          TabOrder = 0
-          TabStop = True
-          ShowCaption = False
-        end
-      end
     end
-    object spltMainSplitter: TSplitter
+    object spltMainSplitter2: TSplitter
       Left = 250
-      Height = 275
+      Height = 183
       Top = 0
-      Width = 5
+      Width = 6
       ResizeStyle = rsLine
     end
     object pnlOptionsRight: TKASToolPanel
-      Left = 255
-      Height = 275
+      Left = 256
+      Height = 183
       Top = 0
-      Width = 521
+      Width = 827
       Align = alClient
       AutoSize = True
       ChildSizing.HorizontalSpacing = 2
       ChildSizing.VerticalSpacing = 2
-      EdgeBorders = [ebBottom]
+      EdgeBorders = []
       TabOrder = 1
       object gbFindReplace: TGroupBox
         AnchorSideLeft.Control = pnlOptionsRight
         AnchorSideTop.Control = pnlOptionsRight
         AnchorSideRight.Control = gbCounter
         Left = 0
-        Height = 184
+        Height = 117
         Top = 0
-        Width = 318
+        Width = 657
         Anchors = [akTop, akLeft, akRight]
         AutoSize = True
         BorderSpacing.Right = 4
@@ -328,78 +224,19 @@ object frmMultiRename: TfrmMultiRename
         ChildSizing.LeftRightSpacing = 4
         ChildSizing.HorizontalSpacing = 2
         ChildSizing.VerticalSpacing = 2
-        ClientHeight = 164
-        ClientWidth = 316
+        ClientHeight = 90
+        ClientWidth = 651
         ParentFont = False
         TabOrder = 0
-        object lbFind: TLabel
+        object pnlFindReplace: TPanel
           AnchorSideLeft.Control = gbFindReplace
           AnchorSideTop.Control = gbFindReplace
+          AnchorSideRight.Control = gbFindReplace
+          AnchorSideRight.Side = asrBottom
           Left = 4
-          Height = 17
+          Height = 62
           Top = 0
-          Width = 38
-          Caption = '&Find...'
-          FocusControl = edFind
-          ParentColor = False
-          ParentFont = False
-        end
-        object lbReplace: TLabel
-          AnchorSideLeft.Control = gbFindReplace
-          AnchorSideTop.Control = edFind
-          AnchorSideTop.Side = asrBottom
-          Left = 4
-          Height = 17
-          Top = 58
-          Width = 60
-          BorderSpacing.Top = 4
-          Caption = 'Re&place...'
-          FocusControl = edReplace
-          ParentColor = False
-          ParentFont = False
-        end
-        object edFind: TEdit
-          AnchorSideLeft.Control = gbFindReplace
-          AnchorSideTop.Control = lbFind
-          AnchorSideTop.Side = asrBottom
-          AnchorSideRight.Control = gbFindReplace
-          AnchorSideRight.Side = asrBottom
-          Left = 4
-          Height = 35
-          Top = 19
-          Width = 308
-          Anchors = [akTop, akLeft, akRight]
-          AutoSelect = False
-          OnChange = edFindChange
-          ParentFont = False
-          TabOrder = 0
-        end
-        object edReplace: TEdit
-          AnchorSideLeft.Control = gbFindReplace
-          AnchorSideTop.Control = lbReplace
-          AnchorSideTop.Side = asrBottom
-          AnchorSideRight.Control = gbFindReplace
-          AnchorSideRight.Side = asrBottom
-          Left = 4
-          Height = 35
-          Top = 77
-          Width = 308
-          Anchors = [akTop, akLeft, akRight]
-          AutoSelect = False
-          OnChange = edReplaceChange
-          ParentFont = False
-          TabOrder = 1
-        end
-        object pnlFindReplace: TPanel
-          AnchorSideLeft.Control = edReplace
-          AnchorSideTop.Control = edReplace
-          AnchorSideTop.Side = asrBottom
-          AnchorSideRight.Control = edReplace
-          AnchorSideRight.Side = asrBottom
-          Left = 4
-          Height = 46
-          Top = 86
-          Width = 318
+          Width = 643
           Anchors = [akTop, akLeft, akRight]
           AutoSize = True
           BevelOuter = bvNone
@@ -408,69 +245,151 @@ object frmMultiRename: TfrmMultiRename
           ChildSizing.VerticalSpacing = 2
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 46
-          ClientWidth = 318
-          TabOrder = 2
-          object cbRegExp: TCheckBox
-            Left = 0
-            Height = 19
+          ClientHeight = 62
+          ClientWidth = 643
+          TabOrder = 0
+          object lbFind: TLabel
+            AnchorSideLeft.Control = pnlFindReplace
+            AnchorSideTop.Control = pnlFindReplace
+            Left = 2
+            Height = 18
             Top = 4
-            Width = 124
+            Width = 27
+            BorderSpacing.Left = 2
             BorderSpacing.Top = 4
-            Caption = 'Regular e&xpressions'
-            OnChange = cbRegExpChange
+            Caption = '&Find'
+            FocusControl = edFind
+            ParentColor = False
+            ParentFont = False
+          end
+          object lbReplace: TLabel
+            AnchorSideLeft.Control = pnlFindReplace
+            AnchorSideTop.Control = lbFind
+            AnchorSideTop.Side = asrBottom
+            Left = 2
+            Height = 18
+            Top = 28
+            Width = 48
+            BorderSpacing.Left = 2
+            BorderSpacing.Top = 6
+            Caption = '&Replace'
+            FocusControl = edReplace
+            ParentColor = False
+            ParentFont = False
+          end
+          object edReplace: TEdit
+            AnchorSideLeft.Control = lbReplace
+            AnchorSideLeft.Side = asrBottom
+            AnchorSideTop.Control = lbReplace
+            AnchorSideRight.Control = pnlFindReplace
+            AnchorSideRight.Side = asrBottom
+            Left = 62
+            Height = 26
+            Top = 28
+            Width = 581
+            Anchors = [akTop, akLeft, akRight]
+            AutoSelect = False
+            OnChange = edReplaceChange
             ParentFont = False
             TabOrder = 0
           end
-          object cbCaseSens: TCheckBox
-            Left = 136
-            Height = 19
-            Hint = 'Case sensitive'
-            Top = 4
-            Width = 42
-            Caption = 'A≠a'
-            OnChange = cbNameStyleChange
-            TabOrder = 2
-          end
-          object cbUseSubs: TCheckBox
-            AnchorSideBottom.Side = asrBottom
-            Left = 0
-            Height = 19
-            Top = 25
-            Width = 124
+          object edFind: TEdit
+            AnchorSideLeft.Control = lbReplace
+            AnchorSideLeft.Side = asrBottom
+            AnchorSideTop.Control = lbFind
+            AnchorSideRight.Control = pnlFindReplace
+            AnchorSideRight.Side = asrBottom
+            Left = 62
+            Height = 26
+            Top = 6
+            Width = 581
+            Anchors = [akTop, akLeft, akRight]
+            AutoSelect = False
             BorderSpacing.Top = 2
-            Caption = '&Use substitution'
-            Enabled = False
-            OnChange = cbNameStyleChange
+            OnChange = edFindChange
             ParentFont = False
             TabOrder = 1
           end
-          object cbOnlyFirst: TCheckBox
-            Left = 136
-            Height = 19
-            Hint = 'Replace only once per file'
-            Top = 25
-            Width = 42
-            Caption = '1x'
-            OnChange = cbNameStyleChange
-            TabOrder = 3
-          end
+        end
+        object cbRegExp: TCheckBox
+          AnchorSideLeft.Control = gbFindReplace
+          AnchorSideTop.Control = pnlFindReplace
+          AnchorSideTop.Side = asrBottom
+          Left = 4
+          Height = 24
+          Top = 66
+          Width = 105
+          BorderSpacing.Top = 4
+          Caption = 'Regular e&xpr.'
+          OnChange = cbRegExpChange
+          ParentFont = False
+          TabOrder = 1
+        end
+        object cbCaseSens: TCheckBox
+          AnchorSideLeft.Control = cbRegExp
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = pnlFindReplace
+          AnchorSideTop.Side = asrBottom
+          Left = 111
+          Height = 24
+          Hint = 'Case sensitive'
+          Top = 66
+          Width = 55
+          BorderSpacing.Top = 4
+          Caption = 'Case'
+          OnChange = cbNameStyleChange
+          TabOrder = 2
+        end
+        object cbUseSubs: TCheckBox
+          AnchorSideLeft.Control = cbOnlyFirst
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = pnlFindReplace
+          AnchorSideTop.Side = asrBottom
+          AnchorSideBottom.Side = asrBottom
+          Left = 227
+          Height = 24
+          Top = 66
+          Width = 100
+          BorderSpacing.Top = 4
+          Caption = 'S&ubstitution'
+          Enabled = False
+          OnChange = cbNameStyleChange
+          ParentFont = False
+          TabOrder = 3
+        end
+        object cbOnlyFirst: TCheckBox
+          AnchorSideLeft.Control = cbCaseSens
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = pnlFindReplace
+          AnchorSideTop.Side = asrBottom
+          Left = 168
+          Height = 24
+          Hint = 'Replace only once per file'
+          Top = 66
+          Width = 57
+          BorderSpacing.Top = 4
+          Caption = '&Once'
+          OnChange = cbNameStyleChange
+          TabOrder = 4
         end
       end
       object btnEditor: TBitBtn
-        AnchorSideLeft.Control = gbCounter
-        AnchorSideTop.Side = asrCenter
-        AnchorSideRight.Control = gbCounter
+        AnchorSideLeft.Control = pnlOptionsRight
+        AnchorSideTop.Control = gbFindReplace
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = pnlOptionsRight
         AnchorSideRight.Side = asrBottom
-        AnchorSideBottom.Control = gbFindReplace
         AnchorSideBottom.Side = asrBottom
-        Left = 322
-        Height = 35
-        Top = 149
-        Width = 199
+        Left = 769
+        Height = 29
+        Top = 123
+        Width = 52
         Action = actInvokeEditor
-        Anchors = [akLeft, akRight, akBottom]
+        Anchors = [akTop, akRight]
         AutoSize = True
+        BorderSpacing.Left = 10
+        BorderSpacing.Top = 6
+        BorderSpacing.Right = 6
         ParentFont = False
         TabOrder = 2
       end
@@ -480,10 +399,10 @@ object frmMultiRename: TfrmMultiRename
         AnchorSideRight.Control = pnlOptionsRight
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Side = asrBottom
-        Left = 322
-        Height = 135
+        Left = 661
+        Height = 119
         Top = 0
-        Width = 199
+        Width = 166
         Anchors = [akTop, akRight]
         AutoSize = True
         Caption = 'Counter'
@@ -496,24 +415,24 @@ object frmMultiRename: TfrmMultiRename
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 115
-        ClientWidth = 197
+        ClientHeight = 92
+        ClientWidth = 160
         ParentFont = False
         TabOrder = 1
         object lbStNb: TLabel
           Left = 4
-          Height = 17
-          Top = 11
-          Width = 85
+          Height = 18
+          Top = 6
+          Width = 48
           BorderSpacing.CellAlignVertical = ccaCenter
-          Caption = 'S&tart Number'
+          Caption = 'S&tart'
           FocusControl = edPoc
           ParentColor = False
           ParentFont = False
         end
         object edPoc: TEdit
-          Left = 93
-          Height = 35
+          Left = 56
+          Height = 26
           Top = 2
           Width = 100
           AutoSelect = False
@@ -525,9 +444,9 @@ object frmMultiRename: TfrmMultiRename
         end
         object lbInterval: TLabel
           Left = 4
-          Height = 17
-          Top = 50
-          Width = 85
+          Height = 18
+          Top = 36
+          Width = 48
           BorderSpacing.CellAlignVertical = ccaCenter
           Caption = '&Interval'
           FocusControl = edInterval
@@ -535,9 +454,9 @@ object frmMultiRename: TfrmMultiRename
           ParentFont = False
         end
         object edInterval: TEdit
-          Left = 93
-          Height = 35
-          Top = 41
+          Left = 56
+          Height = 26
+          Top = 32
           Width = 100
           AutoSelect = False
           MaxLength = 10
@@ -548,9 +467,9 @@ object frmMultiRename: TfrmMultiRename
         end
         object lbWidth: TLabel
           Left = 4
-          Height = 17
-          Top = 87
-          Width = 85
+          Height = 18
+          Top = 66
+          Width = 48
           BorderSpacing.CellAlignVertical = ccaCenter
           Caption = '&Width'
           FocusControl = cmbxWidth
@@ -558,13 +477,13 @@ object frmMultiRename: TfrmMultiRename
           ParentFont = False
         end
         object cmbxWidth: TComboBox
-          Left = 93
-          Height = 31
-          Top = 80
+          Left = 56
+          Height = 26
+          Top = 62
           Width = 100
           BorderSpacing.Bottom = 4
-          ItemHeight = 0
-          ItemIndex = 0
+          ItemHeight = 18
+          ItemIndex = 3
           Items.Strings = (
             '1'
             '2'
@@ -580,66 +499,75 @@ object frmMultiRename: TfrmMultiRename
           ParentFont = False
           Style = csDropDownList
           TabOrder = 2
-          Text = '01'
+          Text = '4'
         end
       end
       object cbLog: TCheckBox
-        AnchorSideLeft.Control = fneRenameLogFileFilename
-        AnchorSideTop.Control = cbLogAppend
-        AnchorSideTop.Side = asrCenter
-        Left = 5
-        Height = 23
-        Top = 190
-        Width = 87
-        BorderSpacing.Top = 2
+        AnchorSideLeft.Control = gbFindReplace
+        AnchorSideTop.Control = gbFindReplace
+        AnchorSideTop.Side = asrBottom
+        Left = 0
+        Height = 24
+        Top = 123
+        Width = 86
+        BorderSpacing.Top = 6
         Caption = '&Log result'
         OnClick = cbLogClick
         ParentFont = False
         TabOrder = 3
       end
       object btnRelativeRenameLogFile: TSpeedButton
+        AnchorSideLeft.Control = btnViewRenameLogFile
         AnchorSideLeft.Side = asrBottom
-        AnchorSideTop.Control = fneRenameLogFileFilename
-        AnchorSideRight.Control = btnViewRenameLogFile
-        AnchorSideBottom.Control = fneRenameLogFileFilename
-        AnchorSideBottom.Side = asrBottom
-        Left = 473
-        Height = 35
-        Top = 215
-        Width = 23
-        Anchors = [akTop, akRight, akBottom]
-        ParentFont = False
-      end
-      object btnViewRenameLogFile: TSpeedButton
-        AnchorSideTop.Control = fneRenameLogFileFilename
+        AnchorSideTop.Control = gbFindReplace
+        AnchorSideTop.Side = asrBottom
         AnchorSideRight.Control = pnlOptionsRight
         AnchorSideRight.Side = asrBottom
         AnchorSideBottom.Control = fneRenameLogFileFilename
         AnchorSideBottom.Side = asrBottom
-        Left = 498
-        Height = 35
-        Top = 215
-        Width = 23
-        Anchors = [akTop, akRight, akBottom]
+        Left = 244
+        Height = 22
+        Top = 123
+        Width = 57
+        AutoSize = True
+        BorderSpacing.Left = 10
+        BorderSpacing.Top = 6
+        Caption = 'Relatuve'
+        ParentFont = False
+      end
+      object btnViewRenameLogFile: TSpeedButton
+        AnchorSideLeft.Control = cbLogAppend
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = gbFindReplace
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = fneRenameLogFileFilename
+        AnchorSideBottom.Side = asrBottom
+        Left = 179
+        Height = 22
+        Top = 123
+        Width = 55
+        AutoSize = True
+        BorderSpacing.Left = 10
+        BorderSpacing.Top = 6
+        Caption = 'Rename'
         ParentFont = False
       end
       object fneRenameLogFileFilename: TFileNameEdit
         AnchorSideLeft.Control = gbFindReplace
         AnchorSideTop.Control = cbLog
         AnchorSideTop.Side = asrBottom
-        AnchorSideRight.Control = btnRelativeRenameLogFile
         AnchorSideBottom.Side = asrBottom
         Left = 5
-        Height = 35
-        Top = 215
-        Width = 466
+        Height = 26
+        Top = 149
+        Width = 377
         DialogTitle = 'Select target log filename'
         DialogOptions = []
         FilterIndex = 0
         HideDirectories = False
         ButtonWidth = 23
         NumGlyphs = 1
-        Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Left = 5
         MaxLength = 0
         ParentFont = False
@@ -651,10 +579,10 @@ object frmMultiRename: TfrmMultiRename
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = gbFindReplace
         AnchorSideTop.Side = asrBottom
-        Left = 102
-        Height = 23
-        Top = 190
-        Width = 75
+        Left = 96
+        Height = 24
+        Top = 123
+        Width = 73
         BorderSpacing.Left = 10
         BorderSpacing.Top = 6
         Caption = 'Append'
@@ -666,28 +594,29 @@ object frmMultiRename: TfrmMultiRename
   end
   object pnlButtons: TPanel
     Left = 0
-    Height = 43
-    Top = 554
-    Width = 788
+    Height = 37
+    Top = 585
+    Width = 1095
     Align = alBottom
     AutoSize = True
     BevelOuter = bvNone
     ChildSizing.LeftRightSpacing = 6
     ChildSizing.TopBottomSpacing = 4
-    ClientHeight = 43
-    ClientWidth = 788
+    ClientHeight = 37
+    ClientWidth = 1095
     TabOrder = 1
     object btnClose: TBitBtn
       AnchorSideTop.Control = pnlButtons
       AnchorSideRight.Control = pnlButtons
       AnchorSideRight.Side = asrBottom
-      Left = 702
-      Height = 35
+      Left = 1009
+      Height = 29
       Top = 4
       Width = 80
       Action = actClose
       Anchors = [akTop, akRight]
       AutoSize = True
+      Caption = 'Close'
       Constraints.MinWidth = 80
       ParentFont = False
       TabOrder = 3
@@ -699,13 +628,14 @@ object frmMultiRename: TfrmMultiRename
       AnchorSideTop.Side = asrCenter
       AnchorSideBottom.Side = asrBottom
       Left = 132
-      Height = 35
+      Height = 29
       Top = 4
-      Width = 100
+      Width = 120
       Action = actResetAll
       AutoSize = True
       BorderSpacing.Left = 6
-      Constraints.MinWidth = 100
+      Caption = '&Q Reset All'
+      Constraints.MinWidth = 120
       ParentFont = False
       TabOrder = 1
     end
@@ -713,15 +643,18 @@ object frmMultiRename: TfrmMultiRename
       AnchorSideTop.Control = btnClose
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = btnClose
-      Left = 629
-      Height = 35
+      Left = 883
+      Height = 29
       Top = 4
-      Width = 67
+      Width = 120
       Action = actRename
       Anchors = [akTop, akRight]
       AutoSize = True
       BorderSpacing.Right = 6
+      Caption = 'Re&name'
+      Constraints.MinWidth = 120
       Default = True
+      Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 2
     end
@@ -730,7 +663,7 @@ object frmMultiRename: TfrmMultiRename
       AnchorSideTop.Control = btnRename
       AnchorSideTop.Side = asrCenter
       Left = 6
-      Height = 35
+      Height = 29
       Top = 4
       Width = 120
       Action = actConfig
@@ -740,10 +673,226 @@ object frmMultiRename: TfrmMultiRename
       TabOrder = 0
     end
   end
+  object pnlOptions1: TPanel
+    Left = 6
+    Height = 388
+    Top = 2
+    Width = 1083
+    Align = alBottom
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Around = 6
+    BevelOuter = bvNone
+    ClientHeight = 388
+    ClientWidth = 1083
+    ParentFont = False
+    TabOrder = 2
+    object pnlOptionsLeft1: TPanel
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 388
+      Top = 0
+      Width = 850
+      Align = alLeft
+      BevelOuter = bvNone
+      ClientHeight = 388
+      ClientWidth = 850
+      ParentFont = False
+      TabOrder = 0
+      object StringGrid: TStringGrid
+        Left = 6
+        Height = 382
+        Top = 6
+        Width = 838
+        Align = alClient
+        AutoFillColumns = True
+        BorderSpacing.Left = 6
+        BorderSpacing.Top = 6
+        BorderSpacing.Right = 6
+        ColCount = 3
+        Columns = <        
+          item
+            SizePriority = 0
+            Title.Caption = 'Old File Name'
+            Width = 248
+          end        
+          item
+            SizePriority = 0
+            Title.Caption = 'New File Name'
+            Width = 249
+          end        
+          item
+            Title.Caption = 'File Path'
+            Width = 339
+          end>
+        ExtendedSelect = False
+        FixedCols = 0
+        GridLineStyle = psClear
+        MouseWheelOption = mwGrid
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        RowCount = 1
+        TabOrder = 0
+        TitleStyle = tsNative
+        OnDrawCell = StringGridDrawCell
+        OnKeyDown = StringGridKeyDown
+        OnMouseDown = StringGridMouseDown
+        OnMouseUp = StringGridMouseUp
+        OnResize = StringGridTopLeftChanged
+        OnSelection = StringGridSelection
+        OnTopLeftChanged = StringGridTopLeftChanged
+        ColWidths = (
+          248
+          249
+          339
+        )
+      end
+    end
+    object spltMainSplitter1: TSplitter
+      Left = 850
+      Height = 388
+      Top = 0
+      Width = 6
+      ResizeStyle = rsLine
+    end
+    object pnlOptionsRight1: TPanel
+      Left = 856
+      Height = 388
+      Top = 0
+      Width = 227
+      Align = alClient
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 388
+      ClientWidth = 227
+      Constraints.MinWidth = 200
+      TabOrder = 2
+      object lsPresets: TListBox
+        AnchorSideLeft.Control = pnlOptionsRight1
+        AnchorSideTop.Control = lbPresets
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = pnlOptionsRight1
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = edPreset
+        Left = 2
+        Height = 304
+        Top = 22
+        Width = 223
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        BorderSpacing.Left = 2
+        BorderSpacing.Top = 2
+        BorderSpacing.Right = 2
+        BorderSpacing.Bottom = 2
+        ItemHeight = 0
+        TabOrder = 0
+      end
+      object edPreset: TEdit
+        AnchorSideLeft.Control = pnlOptionsRight1
+        AnchorSideBottom.Control = btnPresetAdd
+        Left = 4
+        Height = 26
+        Top = 328
+        Width = 80
+        Anchors = [akLeft, akBottom]
+        BorderSpacing.Left = 4
+        BorderSpacing.Bottom = 2
+        TabOrder = 1
+      end
+      object btnPresets: TKASButton
+        AnchorSideLeft.Control = lbPresets
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = lbPresets
+        AnchorSideRight.Control = pnlOptionsRight1
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Side = asrBottom
+        Left = 47
+        Height = 0
+        Top = 2
+        Width = 180
+        Anchors = [akTop, akLeft, akRight]
+        AutoSize = True
+        Caption = 'Presets'
+        Constraints.MinWidth = 16
+        ParentBidiMode = False
+        ParentFont = False
+        TabOrder = 2
+        TabStop = True
+        ShowCaption = False
+      end
+      object cbPresets: TComboBox
+        AnchorSideLeft.Control = edPreset
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = edPreset
+        AnchorSideRight.Control = pnlOptionsRight1
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Side = asrBottom
+        Left = 84
+        Height = 26
+        Top = 328
+        Width = 143
+        Anchors = [akTop, akLeft, akRight]
+        DropDownCount = 15
+        ItemHeight = 26
+        OnChange = cbPresetsChange
+        OnCloseUp = cbPresetsCloseUp
+        ParentFont = False
+        Style = csDropDownList
+        TabOrder = 3
+      end
+      object btnPresetAdd: TButton
+        AnchorSideLeft.Control = pnlOptionsRight1
+        AnchorSideBottom.Control = pnlOptionsRight1
+        AnchorSideBottom.Side = asrBottom
+        Left = 2
+        Height = 28
+        Top = 356
+        Width = 70
+        Anchors = [akLeft, akBottom]
+        AutoSize = True
+        BorderSpacing.Left = 2
+        BorderSpacing.Bottom = 4
+        Caption = 'Add'
+        Constraints.MinWidth = 70
+        TabOrder = 4
+      end
+      object btnPresetDel: TButton
+        AnchorSideLeft.Control = btnPresetAdd
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideRight.Control = pnlOptionsRight1
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = pnlOptionsRight1
+        AnchorSideBottom.Side = asrBottom
+        Left = 171
+        Height = 28
+        Top = 356
+        Width = 54
+        Anchors = [akRight, akBottom]
+        AutoSize = True
+        BorderSpacing.Right = 2
+        BorderSpacing.Bottom = 4
+        Caption = 'Delete'
+        TabOrder = 5
+      end
+      object lbPresets: TLabel
+        AnchorSideLeft.Control = pnlOptionsRight1
+        AnchorSideTop.Control = pnlOptionsRight1
+        AnchorSideRight.Control = pnlOptionsRight1
+        AnchorSideRight.Side = asrBottom
+        Left = 2
+        Height = 18
+        Top = 2
+        Width = 45
+        BorderSpacing.Left = 2
+        BorderSpacing.Top = 2
+        Caption = 'Presets'
+        ParentColor = False
+      end
+    end
+  end
   object pmEditDirect: TPopupMenu
     Images = dmComData.ilEditorImages
-    Left = 504
-    Top = 160
+    Left = 520
+    Top = 144
     object mnuLoadFromFile: TMenuItem
       Action = actLoadNamesFromFile
     end
@@ -756,8 +905,8 @@ object frmMultiRename: TfrmMultiRename
   end
   object mmMainMenu: TMainMenu
     Images = dmComData.ilEditorImages
-    Left = 96
-    Top = 40
+    Left = 280
+    Top = 64
     object miActions: TMenuItem
       Caption = 'Actions'
       object miResetAll: TMenuItem
@@ -794,8 +943,8 @@ object frmMultiRename: TfrmMultiRename
   end
   object actList: TActionList
     Images = dmComData.ilEditorImages
-    Left = 360
-    Top = 96
+    Left = 560
+    Top = 64
     object actAnyNameMask: TAction
       Tag = 63
       Category = 'Masks'
@@ -1058,21 +1207,21 @@ object frmMultiRename: TfrmMultiRename
   end
   object pmDynamicMasks: TPopupMenu
     Images = dmComData.ilEditorImages
-    Left = 96
-    Top = 152
+    Left = 296
+    Top = 144
   end
   object pmPresets: TPopupMenu
     Images = dmComData.ilEditorImages
-    Left = 120
-    Top = 376
+    Left = 416
+    Top = 144
   end
   object pmFloatingMainMaskMenu: TPopupMenu
     Images = dmComData.ilEditorImages
-    Left = 96
-    Top = 96
+    Left = 424
+    Top = 64
   end
   object pmPathToBeRelativeToHelper: TPopupMenu
-    Left = 648
-    Top = 160
+    Left = 672
+    Top = 144
   end
 end
