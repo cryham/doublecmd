@@ -65,10 +65,8 @@ type
   protected
     TabHeader: TFileViewFixedHeader;
     dgPanel: TFileViewGrid;
-    lblDetails: TLabel;
   private
     procedure SetFilesDisplayItems;
-    procedure UpdateFooterDetails;
     procedure dgPanelSelection(Sender: TObject; aCol, aRow: Integer);
   protected
     procedure MakeColumnsStrings(AFile: TDisplayFile);
@@ -605,11 +603,6 @@ begin
   TabHeader:= TFileViewFixedHeader.Create(Self, Self);
   TabHeader.Top:= pnlHeader.Height;
 
-  lblDetails:= TLabel.Create(pnlFooter);
-  lblDetails.Align:= alRight;
-  lblDetails.Alignment:= taRightJustify;
-  lblDetails.Parent:= pnlFooter;
-
   dgPanel.OnSelection:= @dgPanelSelection;
 
   // By default always use some properties.
@@ -790,45 +783,12 @@ begin
     FFiles[i].DisplayItem := Pointer(i);
 end;
 
-procedure TFileViewWithGrid.UpdateFooterDetails;
-var
-  AFile: TFile;
-  AFileName: String;
-begin
-  if not Assigned(FAllDisplayFiles) or (FAllDisplayFiles.Count = 0)
-     or (FSelectedCount > 0) then
-    lblDetails.Caption:= EmptyStr
-  else
-    begin
-      AFile:= CloneActiveFile;
-      if Assigned(AFile) then
-      try
-        // Get details info about file
-        AFileName:= #32#32 +FormatFileFunction('DC().GETFILEEXT{}', AFile, FileSource);
-        AFileName:= AFileName + #32#32 + FormatFileFunction('DC().GETFILESIZE{}', AFile, FileSource);
-        AFileName:= AFileName + #32#32 + FormatFileFunction('DC().GETFILETIME{}', AFile, FileSource);
-        AFileName:= AFileName + #32#32 + FormatFileFunction('DC().GETFILEATTR{}', AFile, FileSource);
-        lblDetails.Caption:= AFileName;
-        // Get file name
-        if not FlatView then
-        begin
-          AFileName:= FormatFileFunction('DC().GETFILENAMENOEXT{}', AFile, FileSource);
-          lblInfo.Caption:= FitFileName(AFileName, lblInfo.Canvas, AFile, lblInfo.ClientWidth);
-        end;
-      finally
-        AFile.Free;
-      end;
-    end;
-end;
-
 procedure TFileViewWithGrid.dgPanelSelection(Sender: TObject; aCol, aRow: Integer);
 begin
   DoFileIndexChanged(dgPanel.CellToIndex(aCol, aRow), dgPanel.TopRow);
-  UpdateFooterDetails;
 end;
 
 procedure TFileViewWithGrid.UpdateInfoPanel;
-
 begin
   inherited UpdateInfoPanel;
   UpdateFooterDetails;
@@ -960,18 +920,9 @@ begin
 end;
 
 procedure TFileViewWithGrid.UpdateFlatFileName;
-var
-  AFile: TFile;
-  AFileName: String;
 begin
-  AFile:= CloneActiveFile;
-  if Assigned(AFile) then
-  try
-    AFileName:= ExtractDirLevel(CurrentPath, AFile.Path) + AFile.NameNoExt;
-    lblInfo.Caption := MinimizeFilePath(AFileName, lblInfo.Canvas, lblInfo.Width);
-  finally
-    AFile.Free;
-  end;
+  UpdateFooterDetails;  //cryham
+  // AFileName:= ExtractDirLevel(CurrentPath, AFile.Path) + AFile.NameNoExt;
 end;
 
 end.

@@ -302,6 +302,7 @@ begin
 
     if FlatView and (FSelectedCount = 0) then UpdateFlatFileName;
   end;
+  UpdateFooterDetails;  //cryham
 end;
 
 procedure TOrderedFileView.DoHandleKeyDown(var Key: Word; Shift: TShiftState);
@@ -574,8 +575,13 @@ begin
 
   SetFileFilter(AFilterText, AFilterOptions);
 
-  lblFilter.Caption := Format('(%s: %s)', [rsFilterStatus, AFilterText]);
-  lblFilter.Visible := Filtered;
+  if Filtered then  //cryham
+    FFilterText := 'F'
+  else
+    FFilterText := '';
+  UpdateFooterDetails;
+  //lblFilter.Caption := Format('(%s: %s)', [rsFilterStatus, AFilterText]);
+  //lblFilter.Visible := Filtered;
 end;
 
 procedure TOrderedFileView.quickSearchChangeSearch(Sender: TObject; ASearchText: String; const ASearchOptions: TQuickSearchOptions; InvertSelection: Boolean = False);
@@ -594,8 +600,13 @@ begin
   end
   else
   begin
-    lblFilter.Caption := Format('(%s: %s)', [rsSearchStatus, ASearchText]);
-    lblFilter.Visible := (ASearchText<>EmptyStr);
+    if ASearchText<>EmptyStr then  //cryham
+      FFilterText := 'S'
+    else
+      FFilterText := '';
+    UpdateFooterDetails;
+    //lblFilter.Caption := Format('(%s: %s)', [rsSearchStatus, ASearchText]);
+    //lblFilter.Visible := (ASearchText<>EmptyStr);
   end;
 end;
 
