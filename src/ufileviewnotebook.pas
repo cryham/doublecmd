@@ -36,7 +36,8 @@ interface
 uses
   Classes, SysUtils, Controls, ComCtrls, LMessages,
   LCLType, Forms,
-  uFileView, uFilePanelSelect, DCXmlConfig;
+  uFileView, uFilePanelSelect, DCXmlConfig,
+  uFileSource, uFileSystemFileSource;
 
 type
 
@@ -47,6 +48,13 @@ type
     tlsDirsInNewTab);    //<en Path change opens a new tab.
 
   TFileViewNotebook = class;
+
+  TCloseViewPage = record  //cryham
+    Name: String;
+    Path: String;
+    //history..
+    //view type..
+  end;
 
   { TFileViewPage }
 
@@ -103,7 +111,7 @@ type
     property FileView: TFileView read GetFileView write SetFileView;
     property Notebook: TFileViewNotebook read GetNotebook;
     property PermanentTitle: String read FPermanentTitle write SetPermanentTitle;
-    property CurrentTitle: String read FCurrentTitle;
+    property CurrentTitle: String read FCurrentTitle write FCurrentTitle;
     property OnActivate: TNotifyEvent read FOnActivate write FOnActivate;
     property BackupViewMode: String read FBackupViewMode write FBackupViewMode;
     property BackupColumnSet: String read FBackupColumnSet write FBackupColumnSet;
@@ -123,6 +131,7 @@ type
     FHintPos: TPoint;
     FLastMouseDownTime: TDateTime;
     FLastMouseDownPageIndex: Integer;
+    FClosedPages: array of TCloseViewPage;  //cryham
 
     function GetActivePage: TFileViewPage;
     function GetActiveView: TFileView;
@@ -163,6 +172,10 @@ type
     function NewEmptyPage: TFileViewPage;
     function NewPage(CloneFromPage: TFileViewPage): TFileViewPage;
     function NewPage(CloneFromView: TFileView): TFileViewPage;
+    
+    procedure UndoClosePage();  //cryham
+    procedure DeletePage(Index: Integer);
+    
     procedure RemovePage(Index: Integer); reintroduce;
     procedure RemovePage(var aPage: TFileViewPage);
     procedure DestroyAllPages;
@@ -197,6 +210,7 @@ uses
   DCStrUtils,
   uGlobs,
   uColumnsFileView,
+  uBriefFileView,
   uArchiveFileSource
   {$IF DEFINED(LCLGTK2)}
   , Glib2, Gtk2
@@ -516,6 +530,75 @@ begin
     Result := nil;
 end;
 
+procedure TFileViewNotebook.DeletePage(Index: Integer);  //cryham
+var
+  APage: TFileViewPage;
+  FView: TFileView;
+  //page: TCloseViewPage;
+  path: String;
+  i,vis: Integer;
+begin
+  vis := 0;  // don't close last
+  for i:=0 to PageCount - 1 do
+    if Pages[i].TabVisible then
+      Inc(vis);
+  //MessageDlg('vis', IntToStr(vis), mtWarning, [mbOK], 0);
+  if vis <= 1 then
+    Exit;
+
+  APage := GetPage(Index);
+  FView := APage.GetFileView;
+  //i := APage.GetPathsCount(0);
+
+{  FView.FHistory;
+   function GetPath(FileSourceIndex, PathIndex: Integer): String;
+   function GetPathsCount(FileSourceIndex: Integer): Integer;
+}
+  SetLength(FClosedPages, Length(FClosedPages) + 1);  // push
+  i := High(FClosedPages);
+  //.. APage.SaveConfiguration();
+  FClosedPages[i].Name := APage.CurrentTitle;  // save
+  FClosedPages[i].Path := FView.CurrentPath;
+
+  //FView.Free;
+  //APage.Free;
+  Pages[Index].Free;
+end;
+
+procedure TFileViewNotebook.UndoClosePage();  //cryham
+var
+  aNewPage: TFileViewPage;
+  aFileView: TFileView;
+  //aFileViewFlags: TFileViewFlags;
+  aFileSource: IFileSource;
+  aPath : string;
+  //Last: TFileViewPage;
+  I: integer;
+begin
+  if Length(FClosedPages) > 0 then
+  begin
+    i := High(FClosedPages);  //last
+
+    if PageIndex >= PageCount - 1 then
+      aNewPage := AddPage  // end
+    else
+      aNewPage := InsertPage(PageIndex);
+
+    aPath := FClosedPages[i].Path;
+    aFileSource := TFileSystemFileSource.GetFileSource;
+    aFileView := TBriefFileView.Create(aNewPage, aFileSource, aPath, []);
+    //fMain. AssignEvents(AFileView);
+    PageIndex := PageCount - 1;
+
+    //aNewPage.SetNamePath := FClosedPages[i].Name;
+    //aNewPage.FileView.CurrentPath := FClosedPages[i].Path;
+
+    aNewPage.MakeActive;
+    SetLength(FClosedPages, Length(FClosedPages) - 1);  // pop
+    //Last.Free;
+  end;
+end;
+
 procedure TFileViewNotebook.RemovePage(Index: Integer);
 begin
 {$IFDEF LCLGTK2}
@@ -530,7 +613,8 @@ begin
   end;
 {$ENDIF}
 
-  Page[Index].Free;
+  DeletePage(Index);  //cryham
+  //Page[Index].Free;
 
   ShowTabs:= ((PageCount > 1) or (tb_always_visible in gDirTabOptions)) and gDirectoryTabs;
 
